@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>宁波·东极岛 3日游 · 海鲜吃透透</title>
+<style>
+:root{
+  --ink:#1a1f36; --paper:#fafbfc; --cream:#f5f3f0;
+  --accent:#c0392b; --accent2:#635bff; --gold:#b8860b; --muted:#697386; --border:#e3e8ee;
+  --green:#2e7d32; --blue:#1565c0; --card-bg:#ffffff;
+  --shadow:0 2px 12px rgba(0,0,0,.06);
+  --cat-sight:#6366f1; --cat-food:#f59e0b; --cat-culture:#10b981; --cat-shop:#ec4899; --cat-night:#8b5cf6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
+.hero{background:linear-gradient(160deg,#7e1214 0%,#b52830 40%,#d4483a 100%);color:#fff;padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.08) 0,transparent 40%),radial-gradient(circle at 80% 80%,rgba(255,255,255,.06) 0,transparent 40%)}
+.hero>*{position:relative}
+.hero-tag{display:inline-block;letter-spacing:4px;font-size:12px;opacity:.85;border:1px solid rgba(255,255,255,.4);padding:4px 14px;border-radius:20px;margin-bottom:16px}
+.hero h1{font-size:34px;font-weight:800;letter-spacing:2px;margin-bottom:10px}
+.hero-sub{font-size:15px;opacity:.92;max-width:560px;margin:0 auto 20px}
+.hero-meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero-meta span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:6px 16px;border-radius:24px;font-size:13px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 18px 60px}
+.section{margin-bottom:34px}
+.section-title{font-size:20px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.section-title::before{content:"";width:6px;height:22px;background:var(--accent);border-radius:3px}
+.card{background:var(--card-bg);border-radius:14px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+/* 概览 */
+.ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.ov-card{background:var(--card-bg);border-radius:12px;padding:14px 8px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border)}
+.ov-card b{display:block;font-size:22px;color:var(--accent)}
+.ov-card span{font-size:12px;color:var(--muted)}
+.route-flow{background:var(--cream);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.route-flow b{color:var(--ink)}
+.route-flow .arrow{color:var(--accent);font-weight:800}
+.route-flow .tag{display:inline-block;background:#fff;border:1px solid var(--border);border-radius:12px;padding:1px 10px;font-size:12px;color:var(--blue)}
+/* 天气 */
+.wx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.wx-card{background:var(--cream);border-radius:12px;padding:14px;text-align:center}
+.wx-card b{display:block;font-size:15px;margin-bottom:4px}
+.wx-card .t{font-size:18px;font-weight:800;color:var(--accent)}
+.wx-card span{font-size:12px;color:var(--muted);display:block}
+.wx-tip{margin-top:10px;background:#fff8e6;border:1px solid #f0e0b0;border-radius:10px;padding:10px 14px;font-size:13px;color:#7a5a00}
+/* 地图 */
+.map-section{position:relative}
+.map-card{background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden}
+.map-tabs{display:flex;background:#f6f7f9;border-bottom:1px solid var(--border)}
+.map-tab{flex:1;padding:12px 6px;border:none;background:transparent;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s;border-bottom:3px solid transparent}
+.map-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:#fff}
+.map-container{width:100%;height:440px;position:relative}
+.map-legend{position:absolute;top:10px;right:10px;z-index:10;background:rgba(255,255,255,.94);border-radius:10px;padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,.12);font-size:12px}
+.map-legend div{display:flex;align-items:center;gap:6px;margin:3px 0}
+.map-legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.map-legend .eat{font-weight:800}
+.fallback-map{width:100%;height:440px;display:flex;align-items:center;justify-content:center;background:#eef2f7;color:var(--muted);font-size:14px;flex-direction:column;gap:8px}
+/* 行程 */
+.day-block{background:var(--card-bg);border-radius:14px;padding:22px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:18px}
+.day-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.day-badge{background:var(--accent);color:#fff;font-weight:800;padding:6px 14px;border-radius:20px;font-size:14px}
+.day-title{font-size:17px;font-weight:800}
+.day-sub{font-size:12px;color:var(--muted)}
+.tl-item{position:relative;padding:0 0 20px 26px;border-left:2px solid #e8dcd8}
+.tl-item:last-child{border-left-color:transparent;padding-bottom:0}
+.tl-dot{position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(192,57,43,.18)}
+.tl-time{font-size:13px;font-weight:800;color:var(--accent);margin-bottom:2px}
+.tl-content{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;transition:.2s;cursor:pointer}
+.tl-content:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+.tl-content.hl{border-color:var(--accent2);box-shadow:0 0 0 2px rgba(99,91,255,.25)}
+.tl-place{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;flex-wrap:wrap}
+.tl-seq{width:22px;height:22px;border-radius:50%;color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.seq-sight{background:var(--cat-sight)} .seq-food{background:var(--cat-food)} .seq-culture{background:var(--cat-culture)} .seq-shop{background:var(--cat-shop)} .seq-night{background:var(--cat-night)}
+.tl-desc{font-size:13px;color:var(--muted);margin-top:4px}
+.tl-tags{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11px;padding:2px 10px;border-radius:10px;font-weight:700}
+.tag-sight{background:#eef2ff;color:var(--cat-sight)} .tag-food{background:#fffbeb;color:var(--cat-food)} .tag-culture{background:#ecfdf5;color:var(--cat-culture)} .tag-shop{background:#fdf2f8;color:var(--cat-shop)} .tag-night{background:#f5f3ff;color:var(--cat-night)}
+.tag-tip{background:#eef6ee;color:var(--green)}
+.tag-cost{background:#f0f4fa;color:var(--blue)}
+.tag-eat{background:#fff3e0;color:#e65100}
+/* 住宿 */
+.hotel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.hotel-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--border);border-top:3px solid var(--accent)}
+.hotel-card h4{font-size:15px;margin-bottom:6px}
+.hotel-card .p{color:var(--accent);font-weight:800;font-size:13px;margin-bottom:4px}
+.hotel-card p{font-size:12px;color:var(--muted)}
+/* 费用 */
+.cost-table{width:100%;border-collapse:collapse;font-size:13px}
+.cost-table th{background:var(--cream);padding:10px 12px;text-align:left;border-bottom:2px solid var(--border)}
+.cost-table td{padding:10px 12px;border-bottom:1px solid #eef1f5}
+.cost-table tr:last-child td{border-bottom:none}
+.cost-table .num{text-align:right;font-weight:700}
+.cost-table .total{background:#fff8e6;font-weight:800;color:var(--accent)}
+/* 贴士 */
+.tip-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tip-card{background:var(--card-bg);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.tip-card b{display:block;font-size:14px;margin-bottom:6px}
+.tip-card b::before{content:"💡 "; }
+.tip-card p{font-size:13px;color:var(--muted)}
+.footer{text-align:center;padding:24px;font-size:12px;color:var(--muted);border-top:1px solid var(--border)}
+.eat-highlight{background:linear-gradient(90deg,#fff7ed,#fffbeb);border:1px solid #f5d9a8;border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:#7a4a00}
+.eat-highlight b{color:#e65100}
+.my-poi-icon{background:transparent;border:none;outline:none}
+@media(max-width:768px){
+  .hero h1{font-size:26px}
+  .ov-grid{grid-template-columns:repeat(2,1fr)}
+  .wx-grid{grid-template-columns:1fr}
+  .hotel-grid{grid-template-columns:1fr}
+  .tip-grid{grid-template-columns:1fr}
+  .map-container{height:300px}
+  .fallback-map{height:300px}
+  .hero-meta span{font-size:12px;padding:4px 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- 1. Hero -->
+<div class="hero">
+  <div class="hero-tag">SEAFOOD · ISLAND · PHOTO</div>
+  <h1>宁波 · 东极岛 3日游</h1>
+  <div class="hero-sub">吃透舟山海鲜，打卡"后会无期"取景地 —— 沈家门夜排档吃到扶墙，庙子湖渔家宴配海风星空</div>
+  <div class="hero-meta">
+    <span>3天2晚 · 15个打卡点</span>
+    <span>预算 ¥1400/人</span>
+    <span>杭州出发</span>
+    <span>周五下午出发</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 2. 行程概览 -->
+  <div class="section">
+    <div class="section-title">行程概览</div>
+    <div class="ov-grid">
+      <div class="ov-card"><b>3</b><span>天 2 晚</span></div>
+      <div class="ov-card"><b>6</b><span>顿海鲜大餐</span></div>
+      <div class="ov-card"><b>2</b><span>座海岛</span></div>
+      <div class="ov-card"><b>¥1400</b><span>人均预算</span></div>
+    </div>
+    <div class="route-flow">
+      <b>杭州</b> <span class="arrow">→高铁1h→</span> <b>宁波</b> <span class="arrow">→大巴2h→</span> <b>沈家门</b> <span class="arrow">→船2h→</span> <b>东极岛·庙子湖</b>
+      <span class="tag">周五下午出发</span> <span class="tag">周日下午返杭</span> <span class="tag">全程公共交通</span>
+    </div>
+    <div class="eat-highlight" style="margin-top:12px">🍤 <b>本方案吃法核心：</b>周五晚沈家门<b>海鲜夜排档</b>（梭子蟹/带鱼/海瓜子现点现炒），周六岛上<b>渔家宴</b>+海鲜面，周日返程前再来一顿收尾 —— 美食点位全部在下方地图用 <b style="color:#f59e0b">琥珀色标记</b> 标出。</div>
+  </div>
+
+  <!-- 3. 天气参考 -->
+  <div class="section">
+    <div class="section-title">天气参考</div>
+    <div class="wx-grid">
+      <div class="wx-card"><b>周五 8/21</b><div class="t">26~31℃</div><span>阴有阵雨或雷雨 · 东南风5-6级阵风7级</span></div>
+      <div class="wx-card"><b>周六 8/22</b><div class="t">27~31℃</div><span>阴有时有阵雨 · 东南到南风6-7级阵风8级</span></div>
+      <div class="wx-card"><b>周日 8/23</b><div class="t">27~32℃</div><span>多云到阴 · 偏南风6-7级阵风8级</span></div>
+    </div>
+    <div class="wx-tip">⚠️ <b>海岛天气提示：</b>周末有阵雨雷雨、风浪较大，出海船班可能受天气影响调整，出发前1天务必确认船班；东极岛船票需提前3天在"舟山海星轮船"公众号抢票（旺季周末票极紧张）。台风季出行请关注临近预报。</div>
+  </div>
+
+  <!-- 4. 路线地图 -->
+  <div class="section map-section">
+    <div class="section-title">🗺 路线地图 <span style="font-size:13px;font-weight:400;color:var(--muted)">（点击彩色序号看美食/景点定位）</span></div>
+    <div class="map-card">
+      <div class="map-tabs">
+        <button class="map-tab active" onclick="switchMapDay(0)">DAY1 周五</button>
+        <button class="map-tab" onclick="switchMapDay(1)">DAY2 周六</button>
+        <button class="map-tab" onclick="switchMapDay(2)">DAY3 周日</button>
+      </div>
+      <div class="map-container" id="map-container">
+        <div class="map-legend">
+          <div><span class="dot" style="background:#f59e0b"></span><b class="eat">🍜 美食 · 必吃</b></div>
+          <div><span class="dot" style="background:#6366f1"></span>景点</div>
+          <div><span class="dot" style="background:#10b981"></span>文化</div>
+          <div><span class="dot" style="background:#8b5cf6"></span>夜生活</div>
+          <div><span class="dot" style="background:#697386"></span>交通</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 每日行程 -->
+  <div class="section" id="itinerary-section">
+    <div class="section-title">每日行程</div>
+    <div id="itinerary-content"></div>
+  </div>
+
+  <!-- 6. 住宿推荐 -->
+  <div class="section">
+    <div class="section-title">住宿推荐</div>
+    <div class="hotel-grid">
+      <div class="hotel-card">
+        <h4>沈家门 · 滨港路海景酒店</h4>
+        <div class="p">¥250-400/晚</div>
+        <p>靠海一排，窗外就是渔港，离夜排档步行3分钟；推荐住这里方便周五晚吃排档、周六早起赶船。</p>
+      </div>
+      <div class="hotel-card">
+        <h4>庙子湖 · 岛上渔家民宿</h4>
+        <div class="p">¥300-600/晚</div>
+        <p>岛上海景房资源少、价格浮动大，提前预订；包餐民宿可含渔家三餐，性价比高。</p>
+      </div>
+      <div class="hotel-card">
+        <h4>朱家尖 · 蜈蚣峙码头周边</h4>
+        <div class="p">¥200-350/晚</div>
+        <p>备选方案：若从蜈蚣峙码头出海，住码头附近更方便；周五晚也可选择直接住朱家尖。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 费用预估 -->
+  <div class="section">
+    <div class="section-title">费用预估（人均）</div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="cost-table">
+        <tr><th>项目</th><th style="text-align:right">金额</th><th>说明</th></tr>
+        <tr><td>高铁 杭州东⇌宁波</td><td class="num">¥120</td><td>单程约54元，约1小时</td></tr>
+        <tr><td>大巴 宁波⇌沈家门</td><td class="num">¥110</td><td>宁波汽车南站直达，约2小时</td></tr>
+        <tr><td>船票 沈家门⇌庙子湖</td><td class="num">¥220</td><td>往返中舱约110元/程，上舱更贵</td></tr>
+        <tr><td>住宿 2晚</td><td class="num">¥500</td><td>沈家门1晚+庙子湖1晚</td></tr>
+        <tr><td>餐饮（重头戏）</td><td class="num">¥420</td><td>夜排档人均150 + 渔家宴150 + 海鲜面等</td></tr>
+        <tr><td>岛上交通/杂费</td><td class="num">¥60</td><td>环岛观光车、寄存等</td></tr>
+        <tr class="total"><td>合计</td><td class="num">约 ¥1430</td><td>吃是最大头，值！</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 8. 实用贴士 -->
+  <div class="section">
+    <div class="section-title">实用贴士</div>
+    <div class="tip-grid">
+      <div class="tip-card"><b>船票务必提前抢</b><p>"舟山海星轮船"公众号提前3天早8点放票，周末票秒空，先抢到船票再订住宿。回程票也一并抢好。</p></div>
+      <div class="tip-card"><b>海鲜怎么点不踩坑</b><p>夜排档先问价再下单；8-9月梭子蟹正肥；必点带鱼、海瓜子、淡菜、蛏子；岛上吃渔家宴提前讲好人均。</p></div>
+      <div class="tip-card"><b>晕船准备</b><p>船程约2小时，风浪大时颠簸明显，提前半小时吃晕船药，坐中舱偏稳，别坐船尾。</p></div>
+      <div class="tip-card"><b>拍照机位</b><p>庙子湖财伯公塑像俯瞰渔港、东极亭看海、码头渔船剪影；周六傍晚光线最柔，适合人像。</p></div>
+      <div class="tip-card"><b>岛上物资</b><p>岛上物价略高，零食饮料可自带；海鲜都是现捕现做，量少味鲜，别按内陆分量点菜。</p></div>
+      <div class="tip-card"><b>天气兜底</b><p>周末有阵雨，带雨衣/伞；如遇大风停航，可改住朱家尖玩南沙海滩，别慌。</p></div>
+    </div>
+  </div>
+
+  <!-- 9. Footer -->
+  <div class="footer">数据来源：腾讯地图 POI · 舟山气象台 · 浙江省气象局 · 公开资料整理<br>生成时间：2026-08-19 · 攻略仅供参考，出行请以实时信息为准</div>
+</div>
+
+<script>
+// ===================== 数据 =====================
+const dayData = [
+  { // DAY1 周五
+    title:"杭州 → 沈家门 · 夜排档开吃",
+    sub:"高铁+大巴+海鲜大餐",
+    center:{lat:29.941, lng:122.318},
+    pois:[
+      {name:"杭州东站", time:"13:30", cat:"trans", lat:30.2909, lng:120.2121, desc:"高铁出发，约1小时到宁波站（二等座¥54）", tip:"", cost:"¥54"},
+      {name:"宁波站", time:"14:40", cat:"trans", lat:29.8620, lng:121.5369, desc:"出站步行至宁波汽车南站（同站换乘），买去沈家门的直达大巴", tip:"", cost:"¥55"},
+      {name:"沈家门汽车站 / 入住", time:"17:00", cat:"trans", lat:29.9450, lng:122.3180, desc:"大巴约2小时抵达，入住滨港路海景酒店，休整一下", tip:"", cost:""},
+      {name:"沈家门海鲜夜排档 ★", time:"18:30", cat:"food", lat:29.9438, lng:122.3128, desc:"滨港路一线夜排档，现点现炒：梭子蟹、清蒸带鱼、海瓜子、蛏子、椒盐皮皮虾。人均150吃撑，16:00开到凌晨", tip:"📷 排档烟火气+渔港灯光，手机出大片", cost:"¥150"},
+      {name:"渔港夜景散步", time:"21:00", cat:"night", lat:29.9410, lng:122.3180, desc:"饭后沿滨港路散步消食，看渔港船灯、听海浪，为明天出海做准备", tip:"", cost:""}
+    ]
+  },
+  { // DAY2 周六
+    title:"出海登岛 · 庙子湖渔家生活",
+    sub:"上午坐船2小时，下午环岛逛吃",
+    center:{lat:30.196, lng:122.686},
+    pois:[
+      {name:"半升洞码头", time:"08:00", cat:"trans", lat:29.9414, lng:122.3210, desc:"沈家门半升洞码头（或朱家尖蜈蚣峙码头）乘船赴东极岛庙子湖，船程约2小时", tip:"", cost:"¥110"},
+      {name:"庙子湖客运码头", time:"10:15", cat:"trans", lat:30.1959, lng:122.6855, desc:"抵达东极岛主岛庙子湖，入住渔家民宿，老板一般会来接行李", tip:"", cost:""},
+      {name:"岛上渔家午餐 · 海鲜面", time:"11:30", cat:"food", lat:30.1960, lng:122.6860, desc:"渔家乐来一碗现捞海鲜面/炒粉干，淡菜、虾干铺满，25元一碗料超足", tip:"", cost:"¥30"},
+      {name:"财伯公塑像（自由男神像）", time:"13:30", cat:"sight", lat:30.1980, lng:122.6880, desc:"岛上地标，手举火把的渔王塑像，俯瞰庙子湖港湾全貌，《后会无期》同款机位", tip:"📷 黄昏时逆光剪影最出片", cost:""},
+      {name:"东极亭 / 观日台", time:"15:00", cat:"sight", lat:30.1970, lng:122.6900, desc:"东极最高观景点，远眺青浜、东福山，海天一色；也是明天日出的最佳机位", tip:"📷 长焦拍海上渔船", cost:""},
+      {name:"庙子湖环岛步道", time:"16:00", cat:"sight", lat:30.1955, lng:122.6840, desc:"沿海步道轻松走一段，看渔民补网晒鱼干，海风很舒服（不必走全程）", tip:"", cost:""},
+      {name:"渔家宴晚餐 ★", time:"18:00", cat:"food", lat:30.1960, lng:122.6860, desc:"民宿或岛上餐馆点一桌：梭子蟹、红烧带鱼、葱油蛏子、淡菜汤，配冰啤酒，人均150", tip:"📷 海岛日落+餐桌美食", cost:"¥150"},
+      {name:"海边夜观星空", time:"20:30", cat:"night", lat:30.1950, lng:122.6850, desc:"岛上光污染极少，晴天可看到满天星斗；风大注意添衣", tip:"📷 三脚架长曝光拍星轨", cost:""}
+    ]
+  },
+  { // DAY3 周日
+    title:"看日出 · 返程",
+    sub:"佛系上午，中午返航",
+    center:{lat:30.14, lng:122.73},
+    pois:[
+      {name:"东极亭看日出（可选）", time:"05:00", cat:"sight", lat:30.1970, lng:122.6900, desc:"早起看海上日出，云层好时霞光万丈；看完回民宿补觉", tip:"📷 日出+海面金光", cost:""},
+      {name:"渔家早餐", time:"08:30", cat:"food", lat:30.1960, lng:122.6860, desc:"海鲜粥/虾饼+小菜，元气满满", tip:"", cost:"¥25"},
+      {name:"东福山岛半日（可选）", time:"09:00", cat:"sight", lat:30.1323, lng:122.7698, desc:"若时间充裕可搭船去最东的东福山岛（船40分钟），象鼻峰+石屋群，赶13:30前返庙子湖即可。时间紧可跳过", tip:"📷 悬崖海景航拍感", cost:"¥80"},
+      {name:"庙子湖码头返航", time:"12:30", cat:"trans", lat:30.1959, lng:122.6855, desc:"乘船返回沈家门（船班请提前确认），约2小时", tip:"", cost:"¥110"},
+      {name:"沈家门收尾午餐", time:"15:00", cat:"food", lat:29.9438, lng:122.3128, desc:"再来一顿海鲜面/炒年糕收尾，然后大巴回宁波", tip:"", cost:"¥40"},
+      {name:"宁波站 → 杭州", time:"17:30", cat:"trans", lat:29.8620, lng:121.5369, desc:"大巴回宁波站，高铁返杭州，约20:00前到家", tip:"", cost:"¥109"}
+    ]
+  }
+];
+const catMeta = {
+  sight:{label:"景点", cn:"景点", color:"#6366f1", bg:"#eef2ff"},
+  food:{label:"美食", cn:"美食", color:"#f59e0b", bg:"#fffbeb"},
+  culture:{label:"文化", cn:"文化", color:"#10b981", bg:"#ecfdf5"},
+  shop:{label:"购物", cn:"购物", color:"#ec4899", bg:"#fdf2f8"},
+  night:{label:"夜生活", cn:"夜生活", color:"#8b5cf6", bg:"#f5f3ff"},
+  trans:{label:"交通", cn:"交通", color:"#697386", bg:"#f1f3f6"}
+};
+
+// ===================== 地图 =====================
+let map = null, markerLayer = null, polylineLayer = null, polylineLayer2 = null, infoWindow = null;
+let currentMapDay = 0;
+const mapCats = {sight:"#6366f1", food:"#f59e0b", culture:"#10b981", shop:"#ec4899", night:"#8b5cf6", trans:"#697386"};
+
+function makeMarkerSvg(num, color){
+  return 'data:image/svg+xml,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34"><circle cx="17" cy="17" r="15" fill="' + color + '" stroke="#fff" stroke-width="2.5"/><text x="17" y="22" text-anchor="middle" fill="white" font-size="15" font-weight="bold">' + num + '</text></svg>'
+  );
+}
+
+function initMap(){
+  if(!window.TMap){ renderFallbackMap(currentMapDay); return; }
+  const c = dayData[0].center;
+  map = new TMap.Map('map-container', {
+    center: new TMap.LatLng(c.lat, c.lng),
+    zoom: 9,
+    mapStyleId: "style8"
+  });
+  infoWindow = new TMap.InfoWindow({ map: map, position: new TMap.LatLng(c.lat, c.lng), offset: { x: 0, y: -40 } });
+  infoWindow.close();
+  updateMap(0);
+}
+
+function updateMap(dayIdx){
+  if(!map || !window.TMap) return;
+  try{
+    const day = dayData[dayIdx];
+    const pois = day.pois;
+    if(markerLayer) markerLayer.setMap(null);
+    if(polylineLayer) polylineLayer.setMap(null);
+    if(polylineLayer2) polylineLayer2.setMap(null);
+
+    const markerStyles = {};
+    pois.forEach((p,i) => {
+      const key = 'm'+i;
+      markerStyles[key] = new TMap.MarkerStyle({
+        width: 34, height: 34, anchor: { x: 17, y: 17 },
+        src: makeMarkerSvg(i+1, mapCats[p.cat] || '#697386')
+      });
+    });
+    const markers = pois.map((p,i) => ({
+      id: 'm'+i, styleId: 'm'+i,
+      position: new TMap.LatLng(p.lat, p.lng),
+      properties: { idx: i }
+    }));
+    markerLayer = new TMap.MultiMarker({ map, styles: markerStyles, geometries: markers });
+    markerLayer.on('click', e => {
+      const idx = e.geometry.properties.idx;
+      showInfoWindow(dayIdx, idx);
+    });
+
+    const paths = pois.map(p => new TMap.LatLng(p.lat, p.lng));
+    if(paths.length > 1){
+      polylineLayer2 = new TMap.MultiPolyline({
+        map, styles: { 'stroke': new TMap.PolylineStyle({ color: 'rgba(30,58,138,0.65)', width: 8, borderWidth: 0, lineCap: 'round', lineJoin: 'round' }) },
+        geometries: [{ id:'s', styleId:'stroke', paths }]
+      });
+      polylineLayer = new TMap.MultiPolyline({
+        map, styles: { 'fill': new TMap.PolylineStyle({ color: 'rgba(59,130,246,0.85)', width: 4, borderWidth: 0, lineCap: 'round', lineJoin: 'round' }) },
+        geometries: [{ id:'f', styleId:'fill', paths }]
+      });
+    }
+    const bounds = new TMap.LatLngBounds();
+    pois.forEach(p => bounds.extend(new TMap.LatLng(p.lat, p.lng)));
+    map.fitBounds(bounds, { padding: 60 });
+  }catch(e){
+    renderFallbackMap(dayIdx);
+  }
+}
+
+function showInfoWindow(dayIdx, poiIdx){
+  if(!map || !window.TMap){ return; }
+  const p = dayData[dayIdx].pois[poiIdx];
+  const m = catMeta[p.cat] || catMeta.sight;
+  infoWindow.setPosition(new TMap.LatLng(p.lat, p.lng));
+  const eatBadge = p.cat === 'food' ? ' <span style="background:#fff3e0;color:#e65100;border-radius:8px;padding:1px 8px;font-size:11px">必吃</span>' : '';
+  infoWindow.setContent('<div style="padding:12px 16px;font-size:13px;max-width:240px">'
+    + '<div style="font-weight:800;font-size:15px;margin-bottom:4px">' + (poiIdx+1) + '. ' + p.name + eatBadge + '</div>'
+    + '<div style="color:#697386;margin-bottom:4px">' + p.time + ' · ' + m.cn + '</div>'
+    + '<div style="color:#333">' + p.desc + '</div>'
+    + (p.tip ? '<div style="color:#2e7d32;margin-top:4px">' + p.tip + '</div>' : '')
+    + '</div>');
+  infoWindow.open();
+}
+
+function renderFallbackMap(dayIdx){
+  const el = document.getElementById('map-container');
+  const day = dayData[dayIdx];
+  const items = day.pois.map((p,i) => {
+    const m = catMeta[p.cat] || catMeta.sight;
+    const eat = p.cat === 'food' ? ' 🍜' : '';
+    return '<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-bottom:1px solid #eef1f5;font-size:13px">'
+      + '<span style="width:22px;height:22px;border-radius:50%;background:' + m.color + ';color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">' + (i+1) + '</span>'
+      + '<b>' + p.name + eat + '</b><span style="color:#697386;margin-left:auto;font-size:12px">' + p.time + '</span></div>';
+  }).join('');
+  el.innerHTML = '<div class="fallback-map"><div style="font-size:16px;font-weight:800">🗺 ' + day.title + '</div>'
+    + '<div style="max-width:480px;width:100%;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.08)">' + items + '</div>'
+    + '<div style="font-size:12px">（离线模式 · 地图暂不可用，已展示点位列表）</div></div>';
+}
+
+function loadLeafletAssets(onReady, onError){
+  if(window.L){ onReady(); return; }
+  if(document.getElementById('leaflet-css')){ onReady(); return; }
+  var css = document.createElement('link');
+  css.id = 'leaflet-css';
+  css.rel = 'stylesheet';
+  css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  document.head.appendChild(css);
+  var s = document.createElement('script');
+  s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  s.onload = onReady;
+  s.onerror = onError;
+  document.body.appendChild(s);
+}
+
+function renderLeafletMap(dayIdx){
+  if(!window.L){ renderFallbackMap(dayIdx); return; }
+  try{
+    var el = document.getElementById('map-container');
+    if(window.__leafletMap){ window.__leafletMap.remove(); window.__leafletMap = null; }
+    var day = dayData[dayIdx];
+    var map = L.map(el, { scrollWheelZoom: true, attributionControl: false }).setView([day.center.lat, day.center.lng], 11);
+    window.__leafletMap = map;
+    L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+      subdomains: ['1','2','3','4'], maxZoom: 18
+    }).addTo(map);
+    var latlngs = [];
+    day.pois.forEach(function(p, i){
+      var m = catMeta[p.cat] || catMeta.sight;
+      latlngs.push([p.lat, p.lng]);
+      var eatBadge = p.cat === 'food' ? ' 🍜 必吃' : '';
+      var icon = L.divIcon({
+        className: 'my-poi-icon',
+        html: '<div style="width:30px;height:30px;border-radius:50%;background:' + (mapCats[p.cat] || '#697386') + ';color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35)">' + (i+1) + '</div>',
+        iconSize: [30, 30], iconAnchor: [15, 15]
+      });
+      L.marker([p.lat, p.lng], { icon: icon }).addTo(map)
+        .bindPopup('<b>' + (i+1) + '. ' + p.name + '</b>' + eatBadge + '<br><span style="color:#697386">' + p.time + ' · ' + m.cn + '</span><br>' + p.desc);
+    });
+    if(latlngs.length > 1){
+      L.polyline(latlngs, { color: '#3b82f6', weight: 4, opacity: .9 }).addTo(map);
+    }
+    map.fitBounds(latlngs, { padding: [40, 40] });
+  }catch(e){
+    renderFallbackMap(dayIdx);
+  }
+}
+
+// ===================== 行程渲染 =====================
+function renderItinerary(dayIdx){
+  const day = dayData[dayIdx];
+  const items = day.pois.map((p,i) => {
+    const m = catMeta[p.cat] || catMeta.sight;
+    const tags = [];
+    tags.push('<span class="tag tag-' + (p.cat === 'trans' ? 'cost' : p.cat) + '">' + m.cn + '</span>');
+    if(p.cat === 'food') tags.push('<span class="tag tag-eat">🍜 必吃</span>');
+    if(p.tip) tags.push('<span class="tag tag-tip">' + p.tip + '</span>');
+    if(p.cost) tags.push('<span class="tag tag-cost">' + p.cost + '</span>');
+    return '<div class="tl-item">'
+      + '<div class="tl-dot"></div>'
+      + '<div class="tl-time">' + p.time + '</div>'
+      + '<div class="tl-content" id="poi-' + dayIdx + '-' + i + '" onclick="focusPoi(' + dayIdx + ',' + i + ')">'
+      + '<div class="tl-place"><span class="tl-seq seq-' + (p.cat === 'trans' ? 'cost' : p.cat) + '">' + (i+1) + '</span>' + p.name + '</div>'
+      + '<div class="tl-desc">' + p.desc + '</div>'
+      + '<div class="tl-tags">' + tags.join('') + '</div>'
+      + '</div></div>';
+  }).join('');
+  document.getElementById('itinerary-content').innerHTML =
+    '<div class="day-block"><div class="day-head"><span class="day-badge">DAY ' + (dayIdx+1) + '</span>'
+    + '<div><div class="day-title">' + day.title + '</div><div class="day-sub">' + day.sub + '</div></div></div>'
+    + items + '</div>';
+}
+
+// ===================== 交互 =====================
+function switchMapDay(dayIdx){
+  currentMapDay = dayIdx;
+  document.querySelectorAll('.map-tab').forEach((t,i)=>t.classList.toggle('active', i===dayIdx));
+  try{ if(map && window.TMap) updateMap(dayIdx); else if(window.L && window.__leafletMap) renderLeafletMap(dayIdx); else renderFallbackMap(dayIdx); }catch(e){ renderFallbackMap(dayIdx); }
+  renderItinerary(dayIdx);
+  document.getElementById('itinerary-section').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function focusPoi(d, i){
+  try{
+    if(map && window.TMap){
+      const p = dayData[d].pois[i];
+      if(currentMapDay !== d){
+        currentMapDay = d;
+        document.querySelectorAll('.map-tab').forEach((t,idx)=>t.classList.toggle('active', idx===d));
+        updateMap(d);
+      }
+      map.easeTo({ center: new TMap.LatLng(p.lat, p.lng), zoom: 14 }, { duration: 800 });
+      showInfoWindow(d, i);
+    } else if(window.L && window.__leafletMap){
+      if(currentMapDay !== d){
+        currentMapDay = d;
+        document.querySelectorAll('.map-tab').forEach((t,idx)=>t.classList.toggle('active', idx===d));
+        renderLeafletMap(d);
+      }
+      window.__leafletMap.setView([p.lat, p.lng], 16);
+      window.__leafletMap.eachLayer(function(layer){
+        if(layer.getLatLng && layer.getPopup){
+          var ll = layer.getLatLng();
+          if(Math.abs(ll.lat - p.lat) < 0.0001 && Math.abs(ll.lng - p.lng) < 0.0001) layer.openPopup();
+        }
+      });
+    }
+  }catch(e){}
+  document.querySelectorAll('.tl-content').forEach(el=>el.classList.remove('hl'));
+  const el = document.getElementById('poi-' + d + '-' + i);
+  if(el){ el.classList.add('hl'); el.scrollIntoView({behavior:'smooth', block:'center'}); }
+}
+
+// ===================== 初始化 =====================
+document.addEventListener('DOMContentLoaded', function(){
+  renderItinerary(0);
+  if(location.protocol === 'file:'){
+    loadLeafletAssets(function(){ renderLeafletMap(0); }, function(){ renderFallbackMap(0); });
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = 'https://map.qq.com/api/gljs?v=1&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&callback=initMap';
+  script.onerror = function(){ loadLeafletAssets(function(){ renderLeafletMap(currentMapDay); }, function(){ renderFallbackMap(currentMapDay); }); };
+  document.body.appendChild(script);
+  setTimeout(function(){
+    if(!map) loadLeafletAssets(function(){ renderLeafletMap(currentMapDay); }, function(){ renderFallbackMap(currentMapDay); });
+  }, 3500);
+});
+</script>
+</body>
+</html>
