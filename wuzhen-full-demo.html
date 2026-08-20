@@ -1,73 +1,178 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="utf-8">
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>乌镇 3 日游 · 江南水乡慢生活</title>
+<title>乌镇 3日游 · 水乡吃逛拍</title>
 <style>
+:root{
+  --ink:#1a1f36; --paper:#fafbfc; --cream:#f5f3f0;
+  --accent:#c0392b; --accent2:#635bff; --gold:#b8860b; --muted:#697386; --border:#e3e8ee;
+  --green:#2e7d32; --blue:#1565c0; --card-bg:#ffffff;
+  --shadow:0 2px 12px rgba(0,0,0,.06);
+  --cat-sight:#6366f1; --cat-food:#f59e0b; --cat-culture:#10b981; --cat-shop:#ec4899; --cat-night:#8b5cf6; --cat-cost:#697386;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#fafbfc;color:#1a1f36;line-height:1.7}
-.hero{background:linear-gradient(160deg,#7e1214,#b52830 40%,#d4483a);color:#fff;padding:44px 20px 36px;text-align:center}
-.hero h1{font-size:28px;margin-bottom:8px}
-.hero .sub{opacity:.92;font-size:14px;max-width:560px;margin:0 auto 14px}
-.hero .hm{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:20px;font-size:12px;margin:3px}
-.wrap{max-width:820px;margin:0 auto;padding:24px 16px 50px}
-.sec{margin-bottom:28px}
-.sec h2{font-size:19px;margin-bottom:12px;padding-left:10px;border-left:4px solid #c0392b}
-.route{background:#f5f3f0;border-radius:10px;padding:12px 14px;font-size:13px;color:#697386}
-#map{height:380px;border-radius:12px;border:1px solid #e3e8ee;z-index:0}
-.day{background:#fff;border:1px solid #e3e8ee;border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.dh{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.db{background:#c0392b;color:#fff;padding:3px 12px;border-radius:14px;font-size:13px;font-weight:700}
-.tl{position:relative;padding:0 0 14px 24px;border-left:2px solid #e8dcd8}
-.tl:last-child{border-left-color:transparent}
-.td{position:absolute;left:-6px;top:3px;width:11px;height:11px;border-radius:50%;background:#c0392b}
-.tt{font-size:12px;font-weight:700;color:#c0392b}
-.tc b{font-size:14px}
-.tds{font-size:12px;color:#697386;margin-top:2px}
-.t{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;margin-left:6px;font-weight:700}
-.t-eat{background:#fff3e0;color:#e65100}
-.hc{background:#fff;border:1px solid #e3e8ee;border-top:3px solid #c0392b;border-radius:10px;padding:14px;margin-bottom:10px}
-.hc .hp{color:#c0392b;font-weight:800;font-size:13px}
-.hc p{font-size:12px;color:#697386}
-table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden}
-td,th{padding:9px 12px;border-bottom:1px solid #eef1f5;text-align:left}
-.num{text-align:right;font-weight:700}
-.tip{background:#fff;border:1px solid #e3e8ee;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
-.footer{text-align:center;padding:20px;font-size:12px;color:#697386;border-top:1px solid #e3e8ee}
-@media(max-width:600px){#map{height:300px}.hero h1{font-size:23px}}
-</style></head><body>
-<div class="hero"><h1>乌镇 3 日游 · 江南水乡慢生活</h1><div class="sub">杭州出发 | 2人 | 人均 ¥1200 | 高铁直达</div><div><span class="hm">🚄 高铁直达</span><span class="hm">2人</span><span class="hm">人均¥1200</span><span class="hm">3天2晚</span></div></div>
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
+.hero{background:linear-gradient(160deg,#7e1214 0%,#b52830 40%,#d4483a 100%);color:#fff;padding:48px 24px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.08) 0,transparent 40%),radial-gradient(circle at 80% 80%,rgba(255,255,255,.06) 0,transparent 40%)}
+.hero>*{position:relative}
+.hero-tag{display:inline-block;letter-spacing:4px;font-size:12px;opacity:.85;border:1px solid rgba(255,255,255,.4);padding:4px 14px;border-radius:20px;margin-bottom:14px}
+.hero h1{font-size:30px;font-weight:800;letter-spacing:2px;margin-bottom:8px}
+.hero-sub{font-size:14px;opacity:.92;max-width:560px;margin:0 auto 16px;line-height:1.6}
+.hero-meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.hero-meta span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:5px 14px;border-radius:22px;font-size:12px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 18px 60px}
+.section{margin-bottom:32px}
+.section-title{font-size:20px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.section-title::before{content:"";width:6px;height:22px;background:var(--accent);border-radius:3px}
+.card{background:var(--card-bg);border-radius:14px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.ov-card{background:var(--card-bg);border-radius:12px;padding:14px 8px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border)}
+.ov-card b{display:block;font-size:22px;color:var(--accent);font-weight:800}
+.ov-card span{font-size:12px;color:var(--muted)}
+.route-flow{background:var(--cream);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--muted);line-height:1.9}
+.route-flow b{color:var(--ink)}
+.eat-highlight{background:linear-gradient(90deg,#fff7ed,#fffbeb);border:1px solid #f5d9a8;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13px;color:#7a4a00}
+.eat-highlight b{color:#e65100}
+.wx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.wx-card{background:var(--cream);border-radius:12px;padding:14px;text-align:center}
+.wx-card b{display:block;font-size:15px;margin-bottom:4px}
+.wx-card .t{font-size:18px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.wx-card span{font-size:12px;color:var(--muted);display:block}
+.wx-tip{margin-top:12px;background:#fff8e6;border:1px solid #f0e0b0;border-radius:10px;padding:10px 14px;font-size:13px;color:#7a5a00;line-height:1.6}
+.map-card{background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden}
+.map-tabs{display:flex;background:#f6f7f9;border-bottom:1px solid var(--border)}
+.map-tab{flex:1;padding:12px 6px;border:none;background:transparent;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s;border-bottom:3px solid transparent}
+.map-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:#fff}
+#map{width:100%;height:440px;z-index:0}
+.map-legend{position:absolute;top:10px;right:10px;z-index:10;background:rgba(255,255,255,.94);border-radius:10px;padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,.12);font-size:12px}
+.map-legend div{display:flex;align-items:center;gap:6px;margin:3px 0}
+.map-legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.day-block{background:var(--card-bg);border-radius:14px;padding:22px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:18px}
+.day-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.day-badge{background:var(--accent);color:#fff;font-weight:800;padding:6px 14px;border-radius:20px;font-size:14px}
+.day-title{font-size:17px;font-weight:800}
+.day-sub{font-size:12px;color:var(--muted)}
+.tl-item{position:relative;padding:0 0 20px 26px;border-left:2px solid #e8dcd8}
+.tl-item:last-child{border-left-color:transparent;padding-bottom:0}
+.tl-dot{position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(192,57,43,.18)}
+.tl-time{font-size:13px;font-weight:800;color:var(--accent);margin-bottom:2px}
+.tl-content{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;transition:.2s;cursor:pointer}
+.tl-content:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+.tl-content.hl{border-color:var(--accent2);box-shadow:0 0 0 2px rgba(99,91,255,.25)}
+.tl-place{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;flex-wrap:wrap}
+.tl-seq{width:22px;height:22px;border-radius:50%;color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.seq-sight{background:var(--cat-sight)} .seq-food{background:var(--cat-food)} .seq-culture{background:var(--cat-culture)} .seq-shop{background:var(--cat-shop)} .seq-night{background:var(--cat-night)} .seq-cost{background:var(--cat-cost)}
+.tl-desc{font-size:13px;color:var(--muted);margin-top:4px}
+.tl-tags{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11px;padding:2px 10px;border-radius:10px;font-weight:700}
+.tag-sight{background:#eef2ff;color:var(--cat-sight)} .tag-food{background:#fffbeb;color:var(--cat-food)} .tag-culture{background:#ecfdf5;color:var(--cat-culture)} .tag-shop{background:#fdf2f8;color:var(--cat-shop)} .tag-night{background:#f5f3ff;color:var(--cat-night)}
+.tag-cost{background:#f1f3f6;color:var(--cat-cost)}
+.tag-tip{background:#eef6ee;color:var(--green)}
+.tag-eat{background:#fff3e0;color:#e65100}
+.hotel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.hotel-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--border);border-top:3px solid var(--accent)}
+.hotel-card h4{font-size:15px;margin-bottom:6px}
+.hotel-card .p{color:var(--accent);font-weight:800;font-size:13px;margin-bottom:6px}
+.hotel-card p{font-size:12px;color:var(--muted);line-height:1.6}
+.cost-table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card-bg);border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.cost-table th{background:var(--cream);padding:11px 12px;text-align:left;border-bottom:2px solid var(--border);font-weight:700}
+.cost-table td{padding:11px 12px;border-bottom:1px solid #eef1f5}
+.cost-table tr:last-child td{border-bottom:none}
+.cost-table .num{text-align:right;font-weight:700}
+.cost-table .total{background:#fff8e6;font-weight:800;color:var(--accent)}
+.tip-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tip-card{background:var(--card-bg);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.tip-card b{display:block;font-size:14px;margin-bottom:6px;font-weight:800}
+.tip-card b::before{content:"💡 "; }
+.tip-card p{font-size:13px;color:var(--muted);line-height:1.6}
+.footer{text-align:center;padding:24px 16px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);line-height:1.8}
+.my-poi-icon{background:transparent;border:none;outline:none}
+@media(max-width:768px){
+  .hero h1{font-size:24px} .hero-sub{font-size:13px}
+  .ov-grid{grid-template-columns:repeat(2,1fr)} .wx-grid{grid-template-columns:1fr}
+  .hotel-grid{grid-template-columns:1fr} .tip-grid{grid-template-columns:1fr}
+  #map{height:300px}
+  .hero-meta span{font-size:11px;padding:4px 10px}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-tag">TRAVEL · FOOD · PHOTO</div>
+  <h1>乌镇 3日游 · 水乡吃逛拍</h1>
+  <div class="hero-sub">江南水乡代表 · 吃喝为主拍照为辅 —— 书生羊肉面、定胜糕、酱鸭配夜景摇橹船</div>
+  <div class="hero-meta"><span>3天2晚 · 14个打卡点</span><span>预算 ¥1050/人</span><span>杭州出发</span><span>周五下午出发</span></div>
+</div>
 <div class="wrap">
-  <div class="sec"><h2>行程概览</h2><div class="route">杭州东 → 桐乡站(高铁24分) → 乌镇汽车站(K350) → 西栅</div></div>
-  <div class="sec"><h2>🗺 路线地图</h2><div class="map-tabs" id="map-tabs"></div><div id="map"></div></div>
-  <div class="sec" id="itinerary-section"><h2>每日行程</h2><div id="itinerary"></div></div>
-  <div class="sec"><h2>住宿推荐</h2><div class="hc"><h4>西栅内临河民宿</h4><div class="hp">¥600-900/晚</div><p>推窗见水，情侣首选</p></div><div class="hc"><h4>西栅外精品客栈</h4><div class="hp">¥300-500/晚</div><p>性价比高，步行10分钟</p></div><div class="hc"><h4>东栅老街民宿</h4><div class="hp">¥180-300/晚</div><p>预算之选，原生态体验</p></div></div>
-  <div class="sec"><h2>费用预估</h2><table><tr><th>项目</th><th style="text-align:right">金额</th><th>说明</th></tr><tr><td>交通</td><td class="num">¥89</td><td>高铁往返¥44 + 公交¥45</td></tr><tr><td>门票</td><td class="num">¥190</td><td>东西栅联票</td></tr><tr><td>住宿</td><td class="num">¥400</td><td>2晚客栈÷2人</td></tr><tr><td>餐饮</td><td class="num">¥350</td><td>正餐+小吃+夜宵</td></tr><tr><td>杂费</td><td class="num">¥171</td><td>摇橹船+美术馆+伴手礼</td></tr></table></div>
-  <div class="sec"><h2>实用贴士</h2><div class="tip"><b>买联票省¥70</b></div><div class="tip"><b>夜游19点后灯光最好</b></div><div class="tip"><b>早起拍晨雾</b></div><div class="tip"><b>临河房提前订</b></div><div class="tip"><b>桐乡站末班约22点</b></div></div>
-  <div class="footer">攻略由 AI 生成 · 请以实时信息为准 · 晴 26°C · 微风</div>
+  <div class="section">
+    <div class="section-title">行程概览</div>
+    <div class="ov-grid"><div class="ov-card"><b>3</b><span>天 2 晚</span></div><div class="ov-card"><b>7</b><span>顿特色吃</span></div><div class="ov-card"><b>2</b><span>景点/栅</span></div><div class="ov-card"><b>¥1050</b><span>人均预算</span></div></div>
+    <div class="route-flow">&lt;b&gt;杭州&lt;/b&gt; → &lt;b&gt;桐乡站&lt;/b&gt; → &lt;b&gt;乌镇汽车站&lt;/b&gt; → &lt;b&gt;西栅&lt;/b&gt;</div>
+    <div class="eat-highlight">🍜 &lt;b&gt;本方案吃法核心：&lt;/b&gt;周五晚西栅&lt;b&gt;书生羊肉面&lt;/b&gt;+夜游</div>
+  </div>
+  <div class="section"><div class="section-title">天气参考</div><div class="wx-grid"><div class="wx-card"><b>周五 8/21</b><div class="t">26~31℃</div><span>阴有阵雨或雷雨 · 偏东风4-6级</span></div><div class="wx-card"><b>周六 8/22</b><div class="t">25~31℃</div><span>阴到多云有阵雨或雷雨 · 偏东风4-6级</span></div><div class="wx-card"><b>周日 8/23</b><div class="t">25~32℃</div><span>多云到阴有时有阵雨 · 东南风4-6级</span></div></div><div class="wx-tip">⚠️ &lt;b&gt;天气提示：&lt;/b&gt;周末有阵雨雷雨，雨具必带</div></div>
+  <div class="section">
+    <div class="section-title">🗺 路线地图 <span style="font-size:13px;font-weight:400;color:var(--muted)">（点击彩色序号或行程项查看定位）</span></div>
+    <div class="map-card">
+      <div class="map-tabs" id="map-tabs"></div>
+      <div id="map" style="position:relative">
+        <div class="map-legend">
+          <div><span class="dot" style="background:#f59e0b"></span><b style="color:#e65100">🍜 美食 · 必吃</b></div>
+          <div><span class="dot" style="background:#6366f1"></span>景点</div>
+          <div><span class="dot" style="background:#10b981"></span>文化</div>
+          <div><span class="dot" style="background:#ec4899"></span>购物</div>
+          <div><span class="dot" style="background:#8b5cf6"></span>夜生活</div>
+          <div><span class="dot" style="background:#697386"></span>交通</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="itinerary-section">
+    <div class="section-title">每日行程</div>
+    <div id="itinerary"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">住宿推荐</div>
+    <div class="hotel-grid"><div class="hotel-card"><h4>西栅景区内民宿</h4><div class="p">¥400-700/晚</div><p>住景区内可多次进出、免费坐景区车，夜里安静体验最好</p></div><div class="hotel-card"><h4>乌镇镇区快捷酒店</h4><div class="p">¥200-350/晚</div><p>性价比之选，步行至西栅10-15分钟</p></div><div class="hotel-card"><h4>西栅外·子夜路民宿</h4><div class="p">¥250-400/晚</div><p>景区南门子夜路一带民宿密集</p></div></div>
+  </div>
+  <div class="section">
+    <div class="section-title">费用预估（人均）</div>
+    <table class="cost-table"><tr><th>项目</th><th style="text-align:right">金额</th><th>说明</th></tr><tr><td>高铁 杭州东⇌桐乡</td><td class="num">¥45</td><td>单程约20元</td></tr><tr><td>公交 桐乡⇌乌镇</td><td class="num">¥20</td><td>K282路</td></tr><tr><td>景区联票</td><td class="num">¥190</td><td>联票190元</td></tr><tr><td>住宿 2晚</td><td class="num">¥450</td><td>镇区酒店</td></tr><tr><td>餐饮</td><td class="num">¥320</td><td>正餐+小吃</td></tr><tr><td>夜游船</td><td class="num">¥60</td><td>摇橹船夜游</td></tr><tr class="total"><td>合计</td><td class="num">约 ¥1085</td><td>中等预算轻松玩</td></tr></table>
+  </div>
+  <div class="section">
+    <div class="section-title">实用贴士</div>
+    <div class="tip-grid"><div class="tip-card"><b>门票怎么买划算</b><p>一天内想玩两栅买联票190元最值；若只玩西栅买150元</p></div><div class="tip-card"><b>必吃清单</b><p>书生羊肉面馆的红烧羊肉面、锦记糕点铺的定胜糕/桂花糕、姑嫂饼、三珍斋酱鸭</p></div><div class="tip-card"><b>时间节奏</b><p>西栅夜景最美，别早睡；东栅早上8点开门适合晨拍</p></div><div class="tip-card"><b>拍照机位</b><p>白莲塔看全貌、水上集市倒影、石桥拱门框景、染坊蓝印花布</p></div><div class="tip-card"><b>交通细节</b><p>桐乡站到乌镇的公交末班约18:00，周五晚到得晚可打车</p></div><div class="tip-card"><b>雨天玩法</b><p>雨天坐廊棚下喝茶听雨、吃热乎的羊肉面；雨后水面反光出片率高</p></div></div>
+  </div>
+  <div class="footer">数据来源：腾讯地图 POI · 公开资料整理 · 生成时间：攻略仅供参考，出行请以实时信息为准</div>
 </div>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-var dayData = [{title:"DAY 1 西栅深度游",center:{lat:30.744,lng:120.49},pois:[{n:"草木本色染坊",lat:30.744,lng:120.49,cat:"culture",t:"09:30",d:"蓝印花布晾晒场",eat:0},
-{n:"书生羊肉面",lat:30.745,lng:120.491,cat:"food",t:"11:30",d:"红烧羊肉面¥35",eat:1},
-{n:"木心美术馆",lat:30.742,lng:120.493,cat:"culture",t:"13:30",d:"临水艺术馆",eat:0},
-{n:"三白酒坊",lat:30.744,lng:120.494,cat:"culture",t:"15:30",d:"免费品酒",eat:0},
-{n:"夜游摇橹船",lat:30.744,lng:120.491,cat:"night",t:"18:30",d:"灯影水乡",eat:0}]},{title:"DAY 2 东栅老街+夜游",center:{lat:30.74,lng:120.486},pois:[{n:"东栅老街",lat:30.74,lng:120.486,cat:"sight",t:"08:30",d:"原生态老街",eat:0},
-{n:"茅盾故居",lat:30.739,lng:120.485,cat:"culture",t:"09:30",d:"文学巨匠故居",eat:0},
-{n:"三珍斋酱鸭",lat:30.741,lng:120.487,cat:"food",t:"12:00",d:"百年酱鸭",eat:1},
-{n:"江南百床馆",lat:30.74,lng:120.488,cat:"culture",t:"14:00",d:"明清床具",eat:0}]},{title:"DAY 3 返程+买伴手礼",center:{lat:30.743,lng:120.492},pois:[]}];
+var dayData = [{title:"DAY1 周五 抵达",sub:"晚上泡西栅",center:{lat:30.274,lng:120.155},pois:[{n:"杭州东站",lat:30.274,lng:120.155,cat:"trans",t:"14:00",d:"高铁出发",tip:"",cost:"¥20"},
+{n:"西栅景区（夜游）",lat:30.743,lng:120.492,cat:"sight",t:"17:00",d:"买联票或夜游票进西栅",tip:"📷 傍晚蓝调时刻拍灯笼初亮",cost:"¥150"},
+{n:"书生羊肉面馆",lat:null,lng:null,cat:"food",t:"18:30",d:"乌镇必吃头牌：红烧羊肉面",tip:"📷 热气腾腾的面+老店招牌",cost:"¥60"},
+{n:"西栅夜景漫步",lat:30.743,lng:120.492,cat:"night",t:"20:00",d:"沿河看夜景灯笼",tip:"",cost:"¥20"}]},
+{title:"DAY2 周六 东西栅",sub:"吃为主角",center:{lat:30.7,lng:120.7},pois:[{n:"东栅景区",lat:null,lng:null,cat:"sight",t:"08:30",d:"早上人少光线好",tip:"",cost:"联票含"},
+{n:"东栅午餐",lat:null,lng:null,cat:"food",t:"11:30",d:"红烧羊肉、白水鱼",tip:"",cost:"¥70"},
+{n:"草木本色染坊",lat:null,lng:null,cat:"culture",t:"14:00",d:"蓝印花布晾晒场",tip:"",cost:"联票含"},
+{n:"锦记糕点铺",lat:null,lng:null,cat:"food",t:"15:30",d:"定胜糕、桂花糕现蒸出炉",tip:"",cost:"¥15"},
+{n:"夜游摇橹船",lat:null,lng:null,cat:"night",t:"20:00",d:"坐摇橹船夜游西栅水道",tip:"",cost:"¥60"}]},
+{title:"DAY3 周日 晨景+返程",sub:"佛系收尾",center:{lat:30.743,lng:120.492},pois:[{n:"西栅晨景漫步",lat:30.743,lng:120.492,cat:"sight",t:"08:30",d:"游客未至，水乡最安静",tip:"",cost:""},
+{n:"伴手礼采购",lat:null,lng:null,cat:"shop",t:"10:30",d:"三珍斋酱鸭真空装、姑嫂饼",tip:"",cost:"¥80"},
+{n:"返程",lat:null,lng:null,cat:"trans",t:"13:00",d:"公交K282回桐乡站",tip:"",cost:"¥25"}]}];
 var catMeta = {
-  sight: {cn:'景点', c:'#6366f1'}, food: {cn:'美食', c:'#f59e0b'},
-  culture: {cn:'文化', c:'#10b981'}, hotel: {cn:'住宿', c:'#ec4899'},
-  night: {cn:'夜生活', c:'#8b5cf6'}, trans: {cn:'交通', c:'#697386'}
+  sight:{cn:'景点',c:'#6366f1'}, food:{cn:'美食',c:'#f59e0b'},
+  culture:{cn:'文化',c:'#10b981'}, shop:{cn:'购物',c:'#ec4899'},
+  night:{cn:'夜生活',c:'#8b5cf6'}, trans:{cn:'交通',c:'#697386'}
 };
-var __leafletMap = null;
-var currentMapDay = 0;
+var __leafletMap = null, currentMapDay = 0;
 
 function renderTabs(){
-  var tabsEl = document.getElementById('map-tabs');
-  if(!tabsEl) return;
-  tabsEl.innerHTML = dayData.map(function(d,i){
+  var el = document.getElementById('map-tabs');
+  if(!el) return;
+  el.innerHTML = dayData.map(function(d,i){
     return '<button class="map-tab' + (i===0?' active':'') + '" onclick="switchMapDay('+i+')">' + d.title + '</button>';
   }).join('');
 }
@@ -75,21 +180,39 @@ function renderTabs(){
 function renderLeafletMap(dayIdx){
   var el = document.getElementById('map');
   if(!el) return;
-  if(!window.L){ el.innerHTML='<div style="padding:40px;text-align:center">地图组件加载失败，请联网后刷新</div>'; return; }
+  if(!window.L){ el.innerHTML='<div style="padding:40px;text-align:center">地图组件加载失败</div>'; return; }
   if(__leafletMap){ __leafletMap.remove(); __leafletMap = null; }
-  var day = dayData[dayIdx] || {title:'DAY1', center:{lat:30.7,lng:120.7}, pois:[]};
-  var map = L.map(el, {scrollWheelZoom:true, attributionControl:false}).setView([day.center.lat, day.center.lng], 11);
-  __leafletMap = map;
-  L.tileLayer('https://rt{s}.map.gtimg.com/tile?z={z}&x={x}&y={y}&type=vector&styleid=3&version=400', {subdomains:['0','1','2','3'], maxZoom:18, tileSize:256, attribution:'&copy; 腾讯地图'}).addTo(map);
+  var day = dayData[dayIdx] || {title:'DAY1',center:{lat:30.7,lng:120.7},pois:[]};
+  var m = L.map(el, {scrollWheelZoom:true, attributionControl:false}).setView([day.center.lat, day.center.lng], 11);
+  __leafletMap = m;
+  L.tileLayer('https://rt{s}.map.gtimg.com/tile?z={z}&x={x}&y={y}&type=vector&styleid=3&version=400', {
+    subdomains:['0','1','2','3'], maxZoom:18, tileSize:256
+  }).addTo(m);
   var latlngs = [];
-  day.pois.forEach(function(p,i){
+  var seq = 0;
+  day.pois.forEach(function(p){
+    if(p.lat == null || p.lng == null) return;
+    seq++;
     latlngs.push([p.lat,p.lng]);
-    var m = catMeta[p.cat] || catMeta.sight;
-    var icon = L.divIcon({className:'my-poi-icon', html:'<div style="width:30px;height:30px;border-radius:50%;background:'+m.c+';color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)">'+(i+1)+'</div>', iconSize:[30,30], iconAnchor:[15,15]});
-    var popup = '<div style="min-width:150px;max-width:230px"><b>'+(i+1)+'. '+p.n+'</b><br><span style="color:#697386;font-size:12px">'+p.t+' &middot; '+m.cn+'</span>'+(p.eat?'<div style="color:#e65100;font-size:12px">&#127858; 必吃</div>':'')+'<div style="font-size:12px;color:#333;margin-top:4px">'+p.d+'</div></div>';
-    L.marker([p.lat,p.lng], {icon:icon}).addTo(map).bindPopup(popup);
+    var meta = catMeta[p.cat] || catMeta.sight;
+    var icon = L.divIcon({
+      className:'my-poi-icon',
+      html:'<div style="width:32px;height:32px;border-radius:50%;background:'+meta.c+';color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35)">'+seq+'</div>',
+      iconSize:[32,32], iconAnchor:[16,16]
+    });
+    var eatTag = p.cat==='food' ? '<div style="color:#e65100;font-size:12px;margin-top:2px">🍜 必吃</div>' : '';
+    var popup = '<div style="min-width:160px;max-width:240px"><b>'+seq+'. '+p.n+'</b>'
+      + '<div style="color:#697386;font-size:12px">'+p.t+' · '+meta.cn+'</div>'
+      + eatTag
+      + '<div style="font-size:12px;color:#333;margin-top:4px">'+p.d+'</div>'
+      + (p.cost ? '<div style="color:#c0392b;font-size:12px;margin-top:4px">'+p.cost+'</div>' : '')
+      + '</div>';
+    L.marker([p.lat,p.lng], {icon:icon}).addTo(m).bindPopup(popup);
   });
-  if(latlngs.length) map.fitBounds(latlngs, {padding:[40,40]});
+  if(latlngs.length>1){
+    L.polyline(latlngs, {color:'#3b82f6',weight:4,opacity:.9}).addTo(m);
+  }
+  if(latlngs.length) m.fitBounds(latlngs, {padding:[40,40]});
 }
 
 function renderItinerary(dayIdx){
@@ -97,14 +220,27 @@ function renderItinerary(dayIdx){
   var el = document.getElementById('itinerary');
   if(!day || !el) return;
   if(!day.pois.length){ el.innerHTML = '<div style="color:#697386;padding:12px">该日暂无行程数据</div>'; return; }
-  el.innerHTML = day.pois.map(function(p,i){
-    var m = catMeta[p.cat] || catMeta.sight;
-    return '<div class="tl" onclick="focusPoi('+dayIdx+','+i+')" style="cursor:pointer">'
-      + '<div class="td"></div>'
-      + '<div class="tt">'+p.t+'</div>'
-      + '<div class="tc"><b>'+p.n+'</b> <span class="t" style="color:'+m.c+';background:'+m.c+'14">'+m.cn+'</span>'+(p.eat?'<span class="t t-eat">&#127858; 必吃</span>':'')
-      + '<div class="tds">'+p.d+'</div></div></div>';
-  }).join('');
+  var seq = 0;
+  el.innerHTML = '<div class="day-block"><div class="day-head">'
+    + '<span class="day-badge">DAY ' + (dayIdx+1) + '</span>'
+    + '<div><div class="day-title">' + day.title + '</div><div class="day-sub">' + (day.sub||'') + '</div></div></div>'
+    + day.pois.map(function(p){
+      var meta = catMeta[p.cat] || catMeta.sight;
+      seq++;
+      var tagCat = p.cat === 'trans' ? 'cost' : p.cat;
+      var tags = '<span class="tag tag-' + tagCat + '">' + meta.cn + '</span>';
+      if(p.cat === 'food') tags += '<span class="tag tag-eat">🍜 必吃</span>';
+      if(p.tip) tags += '<span class="tag tag-tip">' + p.tip + '</span>';
+      if(p.cost) tags += '<span class="tag tag-cost">' + p.cost + '</span>';
+      return '<div class="tl-item">'
+        + '<div class="tl-dot"></div>'
+        + '<div class="tl-time">' + p.t + '</div>'
+        + '<div class="tl-content" onclick="focusPoi(' + dayIdx + ',' + (seq-1) + ')">'
+        + '<div class="tl-place"><span class="tl-seq seq-' + tagCat + '">' + seq + '</span>' + p.n + '</div>'
+        + '<div class="tl-desc">' + p.d + '</div>'
+        + '<div class="tl-tags">' + tags + '</div>'
+        + '</div></div>';
+    }).join('') + '</div>';
 }
 
 function switchMapDay(dayIdx){
@@ -118,10 +254,14 @@ function focusPoi(d,i){
   var p = dayData[d].pois[i];
   if(!p) return;
   if(currentMapDay !== d) switchMapDay(d);
-  if(__leafletMap) __leafletMap.setView([p.lat,p.lng], 15);
+  if(__leafletMap && p.lat != null) __leafletMap.setView([p.lat,p.lng], 15);
+  document.querySelectorAll('.tl-content').forEach(function(el){ el.classList.remove('hl'); });
+  var el = document.querySelectorAll('.tl-content')[i];
+  if(el){ el.classList.add('hl'); el.scrollIntoView({behavior:'smooth', block:'center'}); }
 }
 
 renderTabs();
 switchMapDay(0);
 </script>
-</body></html>
+</body>
+</html>
